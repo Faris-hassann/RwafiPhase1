@@ -64,6 +64,11 @@ import ViewFAQ from './Pages/FAQ/View';
 // Forms
 import Forms from './Pages/Forms';
 
+// Side Users Data
+import TypeUser from './Pages/Type';
+import CreateTypeUser from './Pages/Type/Create';
+import EditTypeUser from './Pages/Type/Edit';
+
 export const ToastContext = createContext();
 
 function AppLayout() {
@@ -157,6 +162,13 @@ function App() {
 
               {/* Forms */}
               <Route path="/Forms" element={<ProtectedRoute><Forms /></ProtectedRoute>} />
+
+              {/* TypeUser */}
+              <Route path="/TypeUser" element={<ProtectedRoute><TypeUser /></ProtectedRoute>} />
+              <Route path="/TypeUser/Create" element={<ProtectedRoute><CreateTypeUser /></ProtectedRoute>} />
+              <Route path="/TypeUser/Edit:id" element={<ProtectedRoute><EditTypeUser /></ProtectedRoute>} />
+
+              {/* Supplier */}
             </Route>
 
             {/* 404 fallback */}

@@ -1,168 +1,417 @@
-import React from 'react';
-import { Link } from 'wouter';
-import { ArrowRightIcon, PlayIcon } from '@heroicons/react/24/outline';
+"use client"
+import { Box, Container, Typography, Button, Grid, Card, CardContent, Avatar, Chip, Paper } from "@mui/material"
+import {
+  ArrowForward as ArrowForwardIcon,
+  PlayArrow as PlayArrowIcon,
+  CheckCircle as CheckCircleIcon,
+  Speed as SpeedIcon,
+  Verified as VerifiedIcon,
+} from "@mui/icons-material"
+import { useEffect, useState } from "react"
 
 const Hero = () => {
+  const [mounted, setMounted] = useState(false)
+
+  // Get the home page theme settings for light mode
+  const themeSettings = {
+    primary: {
+      main: "#1976d2",
+      light: "#42a5f5",
+      dark: "#1565c0",
+    },
+    secondary: {
+      main: "#9c27b0",
+      light: "#ba68c8",
+      dark: "#7b1fa2",
+    },
+    success: {
+      main: "#2e7d32",
+      light: "#4caf50",
+      dark: "#1b5e20",
+    },
+    text: {
+      primary: "#1a1a1a",
+      secondary: "#666666",
+    },
+  }
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <Box
+      id="home"
+      sx={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        position: "relative",
+        background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+        overflow: "hidden",
+        pt: { xs: 8, lg: 10 },
+      }}
+    >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50" />
-      <div className="absolute inset-0 opacity-5">
-        <div className="w-full h-full" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-        }} />
-      </div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-accent rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" />
-      <div className="absolute top-40 right-10 w-72 h-72 bg-gradient-primary rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }} />
-      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse" style={{ animationDelay: '4s' }} />
+      <Box
+        sx={{
+          position: "absolute",
+          top: 80,
+          left: 40,
+          width: 400,
+          height: 400,
+          background: `linear-gradient(45deg, ${themeSettings.primary.main}, ${themeSettings.primary.light})`,
+          borderRadius: "50%",
+          filter: "blur(40px)",
+          opacity: 0.2,
+          animation: "pulse 4s ease-in-out infinite",
+        }}
+      />
+      <Box
+        sx={{
+          position: "absolute",
+          top: 160,
+          right: 40,
+          width: 400,
+          height: 400,
+          background: `linear-gradient(45deg, ${themeSettings.secondary.main}, ${themeSettings.secondary.light})`,
+          borderRadius: "50%",
+          filter: "blur(40px)",
+          opacity: 0.2,
+          animation: "pulse 4s ease-in-out infinite 2s",
+        }}
+      />
 
-      <div className="container-modern relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1 }}>
+        <Grid container spacing={8} alignItems="center">
           {/* Content */}
-          <div className="text-center lg:text-left space-y-8 fade-in">
-            <div className="space-y-4">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse" />
-                Leading Logistics Solutions in Saudi Arabia
-              </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-gradient">Simplify</span> Your Business
+          <Grid item xs={12} lg={6}>
+            <Box sx={{ textAlign: { xs: "center", lg: "left" } }}>
+              <Chip
+                icon={<Box sx={{ width: 12, height: 12, bgcolor: themeSettings.primary.main, borderRadius: "50%" }} />}
+                label="Leading Logistics Solutions in Saudi Arabia"
+                sx={{
+                  bgcolor: "rgba(249, 244, 244, 0.1)",
+                  color: themeSettings.primary.main,
+                  fontWeight: 500,
+                  mb: 4,
+                  fontSize: "1.2rem",
+                  py: 1,
+                  px: 2,
+                }}
+              />
+
+              <Typography
+                variant="h1"
+                sx={{
+                  fontSize: { xs: "2.5rem", md: "3.5rem", lg: "5rem" },
+                  fontWeight: "bold",
+                  lineHeight: 1.2,
+                  color: themeSettings.text.primary,
+                  mb: 4,
+                }}
+              >
+                <Box
+                  component="span"
+                  sx={{
+                    background: `linear-gradient(45deg, ${themeSettings.primary.main}, ${themeSettings.primary.light})`,
+                    backgroundClip: "text",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
+                  Simplify
+                </Box>{" "}
+                Your Business
                 <br />
-                <span className="text-foreground">Entry to Saudi Arabia</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-                Your trusted partner for seamless business entry into the Saudi Arabian market. 
-                We handle all logistics complexities so you can focus on growth and success.
-              </p>
-            </div>
+                Entry to Saudi Arabia
+              </Typography>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/signup" className="btn btn-primary text-lg px-8 py-4 group">
-                Get Started Today
-                <ArrowRightIcon className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-              
-              <button className="btn btn-outline text-lg px-8 py-4 group">
-                <PlayIcon className="w-5 h-5 mr-2" />
-                Watch Demo
-              </button>
-            </div>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: themeSettings.text.secondary,
+                  mb: 6,
+                  maxWidth: 600,
+                  mx: { xs: "auto", lg: 0 },
+                  fontSize: "1.5rem",
+                  lineHeight: 1.6,
+                }}
+              >
+                Your trusted partner for seamless business entry into the Saudi Arabian market. We handle all logistics
+                complexities so you can focus on growth and success.
+              </Typography>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-8 pt-8">
-              <div className="flex items-center space-x-4">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full border-2 border-white bg-gradient-to-r from-purple-400 to-purple-600"
-                    />
-                  ))}
-                </div>
-                <div className="text-sm">
-                  <div className="font-semibold text-foreground">500+ Companies</div>
-                  <div className="text-muted-foreground">Trust Rwafi</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div className="text-sm">
-                  <div className="font-semibold text-green-600">99% Success Rate</div>
-                  <div className="text-muted- ">Guaranteed Results</div>
-                </div>
-              </div>
-            </div>
-          </div>
+              {/* CTA Buttons */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 3,
+                  justifyContent: { xs: "center", lg: "flex-start" },
+                  mb: 6,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{
+                    px: 6,
+                    py: 2,
+                    fontSize: "1.3rem",
+                    borderRadius: 3,
+                    textTransform: "none",
+                    bgcolor: themeSettings.primary.main,
+                  }}
+                >
+                  Get Started Today
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  startIcon={<PlayArrowIcon />}
+                  sx={{
+                    px: 6,
+                    py: 2,
+                    fontSize: "1.3rem",
+                    borderRadius: 3,
+                    border: `1px solid ${themeSettings.primary.main}`,
+                    textTransform: "none",
+                    color: themeSettings.primary.main,
+                  }}
+                >
+                  Watch Demo
+                </Button>
+              </Box>
+
+              {/* Trust Indicators */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  alignItems: "center",
+                  justifyContent: { xs: "center", lg: "flex-start" },
+                  gap: 6,
+                  pt: 3,
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                  <Box sx={{ display: "flex", ml: -1 }}>
+                    {[1, 2, 3, 4].map((i) => (
+                      <Avatar
+                        key={i}
+                        sx={{
+                          width: 40,
+                          height: 40,
+                          bgcolor: themeSettings.primary.main,
+                          color: "white",
+                          border: "3px solid white",
+                          ml: -1,
+                        }}
+                      >
+                        {i}
+                      </Avatar>
+                    ))}
+                  </Box>
+                  <Box>
+                    <Typography variant="h5" fontWeight="bold" color="black">
+                      500+ Companies
+                    </Typography>
+                    <Typography variant="h6" color={themeSettings.text.secondary}>
+                      Trust Rwafi
+                    </Typography>
+                  </Box>
+                </Box>
+
+                <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+                  <Avatar sx={{ bgcolor: themeSettings.success.light, width: 40, height: 40 }}>
+                    <CheckCircleIcon sx={{ color: themeSettings.success.main, fontSize: "1.5rem" }} />
+                  </Avatar>
+                  <Box>
+                    <Typography variant="h5" fontWeight="bold" color={themeSettings.success.main}>
+                      99% Success Rate
+                    </Typography>
+                    <Typography variant="h6" color={themeSettings.text.secondary}>
+                      Guaranteed Results
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
 
           {/* Visual Element */}
-          <div className="relative slide-up">
-            <div className="relative">
-              {/* Main Card */}
-              <div className="card card-hover p-8 shadow-2xl">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-                        <span className="text-white font-bold text-xl">R</span>
-                      </div>
-                      <div>
-                        <div className="font-semibold text-foreground">Rwafi Dashboard</div>
-                        <div className="text-sm text-muted-foreground">Real-time tracking</div>
-                      </div>
-                    </div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="h-4 bg-gray-200 rounded-full w-3/4" />
-                    <div className="h-4 bg-gray-200 rounded-full w-1/2" />
-                    <div className="h-4 bg-gray-200 rounded-full w-5/6" />
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-primary">150+</div>
-                      <div className="text-sm text-muted-foreground">Active Projects</div>
-                    </div>
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600">98%</div>
-                      <div className="text-sm text-muted-foreground">Success Rate</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 card p-4 shadow-lg scale-in z-10" style={{ animationDelay: '0.5s' }}>
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-accent rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-semibold text-foreground">Fast Processing</div>
-                    <div className="text-muted-foreground">24h response</div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="absolute -bottom-4 -left-4 card p-4 shadow-lg scale-in z-10" style={{ animationDelay: '1s' }}>
-                <div className="flex items-center space-x-2">
-                  <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-semibold text-foreground">Verified</div>
-                    <div className="text-muted-foreground">Government approved</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          <Grid item xs={12} lg={6}>
+            <Box sx={{ position: "relative", maxWidth: 600, mx: "auto" }}>
+              {/* Main Dashboard Card */}
+              <Card
+                sx={{
+                  p: 4,
+                  boxShadow: "0 8px 32px rgba(60, 60, 60, 0.10)",
+                  borderRadius: 5,
+                  bgcolor: "white",
+                  minHeight: 320,
+                }}
+              >
+                <CardContent>
+                  <Box sx={{ mb: 4 }}>
+                    {/* r icon */}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        bgcolor: themeSettings.primary.main,
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        color: "white",
+                    }}
+                    >
+                      <Typography variant="h4" fontWeight="bold">
+                        R
+                      </Typography>
+                    </Box>
+                    <Typography variant="h5" fontWeight="bold" color="black" sx={{ mb: 0.5 }}>
+                      Rwafi Dashboard
+                    </Typography>
+                    <Typography variant="body1" color={themeSettings.text.secondary} sx={{ fontWeight: 400 }}>
+                      Real-time tracking
+                    </Typography>
+                  </Box>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse" />
-        </div>
-      </div>
-    </section>
-  );
-};
+                  {/* Placeholder bars */}
+                  <Box sx={{ mb: 4 }}>
+                    {[70, 50, 85].map((width, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          height: 12,
+                          bgcolor: "#f2f4f8",
+                          borderRadius: 2,
+                          mb: 2,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            height: "100%",
+                            width: `${width}%`,
+                            bgcolor: "#e0e7ef",
+                            borderRadius: 2,
+                          }}
+                        />
+                      </Box>
+                    ))}
+                  </Box>
 
-export default Hero;
+                  {/* Stats Section */}
+                  <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                      <Paper
+                        sx={{
+                          p: 3,
+                          textAlign: "center",
+                          bgcolor: "#eaf3fe",
+                          color: themeSettings.primary.main,
+                          borderRadius: 3,
+                          boxShadow: "none",
+                        }}
+                      >
+                        <Typography variant="h3" fontWeight="bold" sx={{ color: themeSettings.primary.main, mb: 0.5 }}>
+                          150+
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: themeSettings.text.secondary, fontWeight: 400 }}>
+                          Active Projects
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Paper
+                        sx={{
+                          p: 3,
+                          textAlign: "center",
+                          bgcolor: "#e6f7ef",
+                          color: themeSettings.success.main,
+                          borderRadius: 3,
+                          boxShadow: "none",
+                        }}
+                      >
+                        <Typography variant="h3" fontWeight="bold" sx={{ color: themeSettings.success.main, mb: 0.5 }}>
+                          98%
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: themeSettings.text.secondary, fontWeight: 400 }}>
+                          Success Rate
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+              </Card>
+
+              {/* Floating Cards - Minimalist, no icons/avatars */}
+              <Card
+                sx={{
+                  position: "absolute",
+                  top: -38,
+                  right: -38,
+                  px: 4,
+                  py: 2.5,
+                  boxShadow: "0 4px 24px rgba(60, 60, 60, 0.10)",
+                  borderRadius: 3,
+                  bgcolor: "white",
+                  zIndex: 2,
+                  minWidth: 200,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <SpeedIcon sx={{ color: themeSettings.primary.main, fontSize: "1.5rem" }} />
+                <Typography variant="subtitle1" fontWeight="bold" color="black" sx={{ mb: 0.5 }}>
+                  Fast Processing
+                </Typography>
+                <Typography variant="body2" sx={{ color: themeSettings.text.secondary, fontWeight: 400 }}>
+                  24h response
+                </Typography>
+              </Card>
+
+              <Card
+                sx={{
+                  position: "absolute",
+                  bottom: -38,
+                  left: -38,
+                  px: 4,
+                  py: 2.5,
+                  boxShadow: "0 4px 24px rgba(60, 60, 60, 0.10)",
+                  borderRadius: 3,
+                  bgcolor: "white",
+                  zIndex: 2,
+                  minWidth: 200,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <VerifiedIcon sx={{ color: themeSettings.primary.main, fontSize: "1.5rem" }} />
+                <Typography variant="subtitle1" fontWeight="bold" color="black" sx={{ mb: 0.5 }}>
+                  Verified
+                </Typography>
+                <Typography variant="body2" sx={{ color: themeSettings.text.secondary, fontWeight: 400 }}>
+                  Government approved
+                </Typography>
+              </Card>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  )
+}
+
+export default Hero

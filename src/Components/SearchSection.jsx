@@ -1,196 +1,376 @@
-import React, { useState } from 'react';
-import { MagnifyingGlassIcon, MapPinIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
+"use client"
+
+import { useState } from "react"
+import {
+  Box,
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Grid,
+  InputAdornment,
+  CircularProgress,
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  ListItemSecondaryAction,
+} from "@mui/material"
+import {
+  Search as SearchIcon,
+  Business as BusinessIcon,
+  Description as DescriptionIcon,
+  AccountBalance as GovernmentIcon,
+  LocalShipping as LogisticsIcon,
+  People as HRIcon,
+  TrendingUp as TrendingIcon,
+  LocationOn as LocationIcon,
+  Speed as SpeedIcon,
+} from "@mui/icons-material"
 
 const SearchSection = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("all")
+  const [isSearching, setIsSearching] = useState(false)
 
+   const themeSettings = {
+    primary: {
+      main: "#1976d2",
+      light: "#42a5f5",
+      dark: "#1565c0",
+    },
+    secondary: {
+      main: "#9c27b0",
+      light: "#ba68c8",
+      dark: "#7b1fa2",
+    },
+    success: {
+      main: "#2e7d32",
+      light: "#4caf50",
+      dark: "#1b5e20",
+    },
+    text: {
+      primary: "#1a1a1a",
+      secondary: "#666666",
+    },
+  }
   const categories = [
-    { id: 'all', name: 'All Services', icon: BuildingOfficeIcon },
-    { id: 'documentation', name: 'Documentation', icon: BuildingOfficeIcon },
-    { id: 'government', name: 'Government Services', icon: BuildingOfficeIcon },
-    { id: 'logistics', name: 'Logistics', icon: BuildingOfficeIcon },
-    { id: 'hr', name: 'HR Services', icon: BuildingOfficeIcon },
-  ];
+    { id: "all", name: "All Services", icon: BusinessIcon },
+    { id: "documentation", name: "Documentation", icon: DescriptionIcon },
+    { id: "government", name: "Government Services", icon: GovernmentIcon },
+    { id: "logistics", name: "Logistics", icon: LogisticsIcon },
+    { id: "hr", name: "HR Services", icon: HRIcon },
+  ]
 
   const popularSearches = [
-    'Business Registration',
-    'Visa Processing',
-    'Customs Clearance',
-    'Document Translation',
-    'Work Permits',
-    'Company Formation'
-  ];
+    "Business Registration",
+    "Visa Processing",
+    "Customs Clearance",
+    "Document Translation",
+    "Work Permits",
+    "Company Formation",
+  ]
 
   const handleSearch = (e) => {
-    e.preventDefault();
-    setIsSearching(true);
-    
-    // Simulate search processing
+    e.preventDefault()
+    setIsSearching(true)
+
     setTimeout(() => {
-      setIsSearching(false);
-      // Handle search logic here
-      console.log('Searching for:', searchQuery, 'in category:', selectedCategory);
-    }, 1000);
-  };
+      setIsSearching(false)
+      console.log("Searching for:", searchQuery, "in category:", selectedCategory)
+    }, 1000)
+  }
 
   const handleQuickSearch = (query) => {
-    setSearchQuery(query);
-    // Trigger search immediately
-    console.log('Quick search for:', query);
-  };
+    setSearchQuery(query)
+    console.log("Quick search for:", query)
+  }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/5 via-white to-blue-50">
-      <div className="container-modern">
+    <Box
+      sx={{
+        py: 10,
+        background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      }}
+    >
+      <Container maxWidth="xl">
         {/* Section Header */}
-        <div className="text-center mb-12 fade-in">
-          <h2 className="text-gradient mb-4">
+        <Box sx={{ textAlign: "center", mb: 6 }}>
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: "2rem", md: "3.5rem" },
+              fontWeight: "bold",
+              mb: 2,
+              background: `linear-gradient(45deg, ${themeSettings.primary.main}, ${themeSettings.primary.light})`,
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Find the Right Service for Your Business
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Search through our comprehensive range of logistics and business services 
-            to find exactly what you need for your Saudi Arabian operations.
-          </p>
-        </div>
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              fontSize: { xs: "1rem", md: "1.5rem" },
+              fontWeight: "normal",
+              color: themeSettings.text.secondary,
+              maxWidth: 800,
+              mx: "auto",
+            }}
+          >
+            Search through our comprehensive range of logistics and business services to find exactly what you need for
+            your Saudi Arabian operations.
+          </Typography>
+        </Box>
 
         {/* Search Interface */}
-        <div className="max-w-4xl mx-auto slide-up">
-          <div className="card p-8 shadow-xl">
-            {/* Search Form */}
-            <form onSubmit={handleSearch} className="space-y-6">
+        <Box sx={{ maxWidth: 1000, mx: "auto", mb: 6  }}>
+          <Card sx={{ p: 4, boxShadow: 3, borderRadius: 3 , backgroundColor: "white" }}>
+            <Box component="form" onSubmit={handleSearch}>
               {/* Category Selection */}
-              <div className="flex flex-wrap gap-3">
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    type="button"
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 focus-ring ${
-                      selectedCategory === category.id
-                        ? 'bg-primary text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    <category.icon className="w-4 h-4" />
-                    <span>{category.name}</span>
-                  </button>
-                ))}
-              </div>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, mb: 3 }}>
+                {categories.map((category) => {
+                  const IconComponent = category.icon
+                  return (
+                    <Chip
+                      key={category.id}
+                      icon={<IconComponent />}
+                      label={category.name}
+                      onClick={() => setSelectedCategory(category.id)}
+                      variant={selectedCategory === category.id ? "filled" : "outlined"}
+                      color={selectedCategory === category.id ? "primary" : "default"}
+                      sx={{
+                        fontWeight: 500,
+                        fontSize: "1.1rem",
+                        px: 2.5,
+                        py: 1.2,
+                        borderRadius: "999px",
+                        color: selectedCategory === category.id ? "white" : themeSettings.text.primary,
+                        backgroundColor: selectedCategory === category.id ? themeSettings.primary.main : "white",
+                        border: selectedCategory === category.id ? "none" : `1.5px solid #d1d5db`,
+                        boxShadow: selectedCategory === category.id ? `0 2px 8px ${themeSettings.primary.main}22` : undefined,
+                        transition: "all 0.2s",
+                        '& .MuiChip-icon': {
+                          color: selectedCategory === category.id ? 'white' : themeSettings.text.primary,
+                        },
+                      }}
+                    />
+                  )
+                })}
+              </Box>
 
               {/* Search Input */}
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <MagnifyingGlassIcon className="w-5 h-5 text-gray-400" />
-                </div>
-                <input
-                  type="text"
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <TextField
+                  fullWidth
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for services, documents, or requirements..."
-                  className="input pl-12 pr-4 py-4 text-lg w-full"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon sx={{ color: themeSettings.text.secondary, fontSize: 28 }} />
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: "18px",
+                      fontSize: "1.2rem",
+                      height: 56,
+                      background: "#fff",
+                      border: `2px solid ${themeSettings.primary.main}`,
+                      boxShadow: "none",
+                      px: 2,
+                      "& fieldset": {
+                        borderColor: themeSettings.primary.main,
+                      },
+                    },
+                    "& .MuiInputBase-input::placeholder": {
+                      color: themeSettings.text.secondary,
+                      opacity: 1,
+                      fontSize: "1.1rem",
+                    },
+                  }}
                 />
-                <button
+                <Button
                   type="submit"
+                  variant="contained"
+                  size="large"
                   disabled={isSearching || !searchQuery.trim()}
-                  className="absolute inset-y-0 right-0 px-6 flex items-center btn btn-primary rounded-l-none"
+                  sx={{
+                    px: 4,
+                    borderRadius: "18px",
+                    textTransform: "none",
+                    minWidth: 120,
+                    fontSize: "1.1rem",
+                    fontWeight: 600,
+                    bgcolor: isSearching || !searchQuery.trim() ? "#e0e0e0" : themeSettings.primary.main,
+                    color: isSearching || !searchQuery.trim() ? themeSettings.text.secondary : "white",
+                    boxShadow: "none",
+                  }}
                 >
-                  {isSearching ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    'Search'
-                  )}
-                </button>
-              </div>
-            </form>
+                  {isSearching ? <CircularProgress size={24} color="inherit" /> : "Search"}
+                </Button>
+              </Box>
+            </Box>
 
             {/* Popular Searches */}
-            <div className="mt-8 pt-8 border-t border-gray-200">
-              <h3 className="text-sm font-medium text-gray-700 mb-4">
+            <Box sx={{ mt: 4, pt: 3, borderTop: "1px solid", borderColor: "divider" }}>
+              <Typography variant="body2" fontWeight="bold" sx={{ mb: 2, color: themeSettings.text.secondary }}>
                 Popular Searches:
-              </h3>
-              <div className="flex flex-wrap gap-2">
+              </Typography>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
                 {popularSearches.map((search) => (
-                  <button
+                  <Chip
                     key={search}
+                    label={search}
+                    variant="outlined"
+                    size="small"
                     onClick={() => handleQuickSearch(search)}
-                    className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors duration-200 focus-ring"
-                  >
-                    {search}
-                  </button>
+                    sx={{
+                      borderRadius: "999px",
+                      fontSize: "1rem",
+                      px: 2,
+                      py: 1,
+                      fontWeight: 500,
+                      color: themeSettings.text.primary,
+                      border: `1.5px solid #d1d5db`,
+                      background: "#fff",
+                      '&:hover': {
+                        bgcolor: themeSettings.primary.light + '22',
+                      },
+                    }}
+                  />
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Card>
+        </Box>
 
         {/* Search Results Preview */}
         {searchQuery && (
-          <div className="mt-8 max-w-4xl mx-auto slide-up">
-            <div className="card p-6">
-              <h3 className="text-lg font-semibold mb-4">
-                Search Results for "{searchQuery}"
-              </h3>
-              <div className="space-y-4">
-                {[1, 2, 3].map((item) => (
-                  <div key={item} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 cursor-pointer">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <BuildingOfficeIcon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-medium text-foreground">
-                        {searchQuery} Service {item}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        Comprehensive solution for {searchQuery.toLowerCase()} requirements
-                      </p>
-                    </div>
-                    <button className="btn btn-outline text-sm">
-                      Learn More
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <Box sx={{ maxWidth: 1000, mx: "auto", mb: 6 }}>
+            <Card sx={{ borderRadius: 5, boxShadow: "0 8px 32px rgba(60, 60, 60, 0.10)", bgcolor: "white", p: 3 }}>
+              <CardContent sx={{ p: 0 }}>
+                <Typography variant="h6" sx={{ mb: 3, fontWeight: 700, color: themeSettings.text.primary }}>
+                  Search Results for "{searchQuery}"
+                </Typography>
+                <List disablePadding>
+                  {[1, 2, 3].map((item) => (
+                    <ListItem
+                      key={item}
+                      sx={{
+                        bgcolor: "#f7f9fa",
+                        borderRadius: 3,
+                        mb: 2,
+                        px: 3,
+                        py: 2.5,
+                        display: "flex",
+                        alignItems: "center",
+                        boxShadow: "none",
+                      }}
+                    >
+                      <ListItemAvatar>
+                        <Avatar sx={{ bgcolor: themeSettings.primary.main, width: 56, height: 56 }}>
+                          <BusinessIcon sx={{ color: "white", fontSize: 32 }} />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={
+                          <Typography variant="h6" sx={{ color: themeSettings.text.primary, fontWeight: 600, fontSize: "1.2rem" }}>
+                            {searchQuery} Service {item}
+                          </Typography>
+                        }
+                        secondary={
+                          <Typography variant="body1" sx={{ color: themeSettings.text.secondary, fontSize: "1rem" }}>
+                            Comprehensive solution for {searchQuery.toLowerCase()} requirements
+                          </Typography>
+                        }
+                        sx={{ ml: 2 }}
+                      />
+                      <ListItemSecondaryAction>
+                        <Button
+                          variant="outlined"
+                          size="large"
+                          sx={{
+                            borderRadius: "999px",
+                            px: 3,
+                            py: 1,
+                            fontWeight: 600,
+                            fontSize: "1rem",
+                            borderColor: themeSettings.primary.main,
+                            color: themeSettings.primary.main,
+                            background: "white",
+                            '&:hover': {
+                              borderColor: themeSettings.primary.dark,
+                              color: themeSettings.primary.dark,
+                              background: themeSettings.primary.light + '11',
+                            },
+                          }}
+                        >
+                          Learn More
+                        </Button>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </List>
+              </CardContent>
+            </Card>
+          </Box>
         )}
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+        <Grid container spacing={4} sx={{ mt: 4  }} justifyContent="center" alignItems="center" textAlign="center" flexDirection={{ xs: "column", md: "row" }}>
           {[
             {
-              icon: MagnifyingGlassIcon,
-              title: 'Smart Search',
-              description: 'AI-powered search that understands your business needs and suggests relevant services.'
+              icon: TrendingIcon,
+              title: "Smart Search",
+              description: "AI-powered search that understands your business needs and suggests relevant services.",
             },
             {
-              icon: MapPinIcon,
-              title: 'Local Expertise',
-              description: 'Deep understanding of Saudi Arabian regulations and business requirements.'
+              icon: LocationIcon,
+              title: "Local Expertise",
+              description: "Deep understanding of Saudi Arabian regulations and business requirements.",
             },
             {
-              icon: BuildingOfficeIcon,
-              title: 'Comprehensive Solutions',
-              description: 'End-to-end services from initial setup to ongoing operations and compliance.'
-            }
+              icon: SpeedIcon,
+              title: "Comprehensive Solutions",
+              description: "End-to-end services from initial setup to ongoing operations and compliance.",
+            },
           ].map((feature, index) => (
-            <div key={index} className="text-center scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <feature.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
+            <Grid item xs={12} md={4} key={index}>
+              <Box sx={{ textAlign: "center" }}>
+                <Avatar
+                  sx={{
+                    width: 64,
+                    height: 64,
+                    bgcolor: themeSettings.primary.main,
+                    mx: "auto",
+                    mb: 2,
+                  }}
+                >
+                  <feature.icon sx={{ fontSize: 38, color: "white" }} />
+                </Avatar>
+                <Typography variant="h5" fontWeight="bold" color="black" sx={{ mb: 1 }}>
+                  {feature.title}
+                </Typography>
+                <Typography variant="body2" color= {themeSettings.text.secondary}>
+                  {feature.description}
+                </Typography>
+              </Box>
+            </Grid>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+        </Grid>
+      </Container>
+    </Box>
+  )
+}
 
-export default SearchSection;
+export default SearchSection

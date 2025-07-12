@@ -1,7 +1,9 @@
-import React from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+"use client"
 
-// Sample partner companies data - can be moved to a separate file or API
+import { useState, useEffect } from "react"
+import { Box, Container, Typography, Card, CardContent, IconButton, Grid, Button } from "@mui/material"
+import { ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon } from "@mui/icons-material"
+
 const partnerCompanies = [
   {
     id: 1,
@@ -54,176 +56,297 @@ const partnerCompanies = [
 ];
 
 const PartnerCompanies = () => {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = React.useState(true);
-  const containerRef = React.useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
-  // Auto-play functionality
-  React.useEffect(() => {
-    if (!isAutoPlaying) return;
+  // Get the home page theme settings for light mode
+  const themeSettings = {
+    primary: {
+      main: "#1976d2",
+      light: "#42a5f5",
+      dark: "#1565c0",
+    },
+    secondary: {
+      main: "#9c27b0",
+      light: "#ba68c8",
+      dark: "#7b1fa2",
+    },
+    success: {
+      main: "#2e7d32",
+      light: "#4caf50",
+      dark: "#1b5e20",
+    },
+    text: {
+      primary: "#1a1a1a",
+      secondary: "#666666",
+    },
+  }
+
+  useEffect(() => {
+    if (!isAutoPlaying) return
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
-        prevIndex === partnerCompanies.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 3000);
+      setCurrentIndex((prevIndex) => (prevIndex === partnerCompanies.length - 4 ? 0 : prevIndex + 1))
+    }, 3000)
 
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
-
-  // Pause auto-play on hover
-  const handleMouseEnter = () => setIsAutoPlaying(false);
-  const handleMouseLeave = () => setIsAutoPlaying(true);
+    return () => clearInterval(interval)
+  }, [isAutoPlaying])
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === partnerCompanies.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+    setCurrentIndex((prevIndex) => (prevIndex === partnerCompanies.length - 4 ? 0 : prevIndex + 1))
+  }
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? partnerCompanies.length - 1 : prevIndex - 1
-    );
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? partnerCompanies.length - 4 : prevIndex - 1))
+  }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container-modern">
+    <Box
+      id="partners"
+      sx={{
+        py: 10,
+        background: "linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)",
+      }}
+      onMouseEnter={() => setIsAutoPlaying(false)}
+      onMouseLeave={() => setIsAutoPlaying(true)}
+    >
+      <Container maxWidth="xl">
         {/* Section Header */}
-        <div className="text-center mb-16 fade-in">
-          <h2 className="text-gradient mb-4">
+        <Box sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: { xs: "2.5rem", md: "3rem" },
+              fontWeight: "bold",
+              mb: 2,
+              background: `linear-gradient(45deg, ${themeSettings.primary.main}, ${themeSettings.primary.light})`,
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
             Trusted by Leading Companies
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We partner with the most respected companies across Saudi Arabia and beyond, 
-            delivering exceptional logistics solutions that drive business success.
-          </p>
-        </div>
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              color: themeSettings.text.secondary,
+              maxWidth: 800,
+              mx: "auto",
+              fontSize: "1.3rem",
+              lineHeight: 1.6,
+            }}
+          >
+            We partner with the most respected companies across Saudi Arabia and beyond, delivering exceptional
+            logistics solutions that drive business success.
+          </Typography>
+        </Box>
 
         {/* Carousel Container */}
-        <div 
-          className="relative max-w-6xl mx-auto"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+        <Box sx={{ position: "relative", maxWidth: 1200, mx: "auto", px: { xs: 2, md: 4 } }}>
           {/* Navigation Buttons */}
-          <button
+          <IconButton
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 btn btn-secondary w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 focus-ring"
-            aria-label="Previous partner"
+            sx={{
+              position: "absolute",
+              left: { xs: 0, md: 0 },
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 2,
+              bgcolor: "white",
+              border: `2px solid ${themeSettings.primary.main}`,
+              color: themeSettings.primary.main,
+              boxShadow: 2,
+              "&:hover": {
+                boxShadow: 4,
+                bgcolor: themeSettings.primary.light,
+                color: themeSettings.primary.dark,
+              },
+            }}
           >
-            <ChevronLeftIcon className="w-6 h-6" />
-          </button>
+            <ChevronLeftIcon />
+          </IconButton>
 
-          <button
+          <IconButton
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 btn btn-secondary w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 focus-ring"
-            aria-label="Next partner"
+            sx={{
+              position: "absolute",
+              right: { xs: 0, md: 0 },
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 2,
+              bgcolor: "white",
+              border: `2px solid ${themeSettings.primary.main}`,
+              color: themeSettings.primary.main,
+              boxShadow: 2,
+              "&:hover": {
+                boxShadow: 4,
+                bgcolor: themeSettings.primary.light,
+                color: themeSettings.primary.dark,
+              },
+            }}
           >
-            <ChevronRightIcon className="w-6 h-6" />
-          </button>
+            <ChevronRightIcon />
+          </IconButton>
 
           {/* Carousel Track */}
-          <div className="overflow-hidden rounded-2xl">
-            <div 
-              ref={containerRef}
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{
-                transform: `translateX(-${currentIndex * (100 / 4)}%)`,
-                width: `${(partnerCompanies.length / 4) * 100}%`
+          <Box sx={{ overflow: 'hidden', borderRadius: 3, pb: 1, width: '100%', maxWidth: 1200, mx: 'auto', pl: { xs: 2, md: 4 }, pr: { xs: 2, md: 4 }, boxSizing: 'border-box' }}>
+            <Box
+              sx={{
+                display: "flex",
+                minWidth: "100%",
+                width: "100%",
+                transform: `translateX(-${currentIndex * 25}%)`,
+                transition: "transform 0.5s ease-in-out",
               }}
             >
-              {partnerCompanies.map((company, index) => (
-                <div
+              {partnerCompanies.map((company) => (
+                <Box
                   key={company.id}
-                  className="flex-shrink-0 w-1/4 px-4"
-                  style={{ width: `${100 / 4}%` }}
+                  sx={{
+                    minWidth: "25%",
+                    px: 1,
+                  }}
                 >
-                  <div className="card card-hover p-6 h-48 flex flex-col items-center justify-center text-center group">
-                    <div className="w-32 h-16 mb-4 overflow-hidden rounded-lg bg-white shadow-sm border">
-                      <img
-                        src={company.logo}
-                        alt={`${company.name} logo`}
-                        className="w-full h-full object-contain p-2 transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2 text-foreground">
-                      {company.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {company.description}
-                    </p>
-                  </div>
-                </div>
+                  <Card
+                    sx={{
+                      height: 200,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      transition: "transform 0.3s ease",
+                      bgcolor: "white",
+                      boxShadow: 1,
+                      borderRadius: 4,
+                      "&:hover": {
+                        transform: "translateY(-4px)",
+                        boxShadow: 4,
+                      },
+                    }}
+                  >
+                    <CardContent>
+                      <Box
+                        sx={{
+                          width: 120,
+                          height: 60,
+                          mb: 2,
+                          overflow: "hidden",
+                          borderRadius: 2,
+                          bgcolor: "#f5f7fa",
+                          border: "1px solid #e0e7ef",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <img
+                          src={company.logo || "/placeholder.svg"}
+                          alt={`${company.name} logo`}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                            padding: "8px",
+                          }}
+                        />
+                      </Box>
+                      <Typography variant="h5" fontWeight="bold" color={themeSettings.text.primary} sx={{ mb: 1 }}>
+                        {company.name}
+                      </Typography>
+                      <Typography variant="body1" color={themeSettings.text.secondary}>
+                        {company.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Pagination Dots */}
-          <div className="flex justify-center mt-8 space-x-2">
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 4, gap: 1 }}>
             {Array.from({ length: Math.ceil(partnerCompanies.length / 4) }).map((_, index) => (
-              <button
+              <Box
                 key={index}
-                onClick={() => goToSlide(index * 4)}
-                className={`w-3 h-3 rounded-full transition-all duration-200 focus-ring ${
-                  Math.floor(currentIndex / 4) === index
-                    ? 'bg-primary scale-110'
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => setCurrentIndex(index * 4)}
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  bgcolor: Math.floor(currentIndex / 4) === index ? themeSettings.primary.main : "#e0e7ef",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    bgcolor: themeSettings.primary.main,
+                  },
+                }}
               />
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        {/* Mobile Responsive Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-12 lg:hidden">
+        {/* Mobile Grid */}
+        <Grid container spacing={2} sx={{ mt: 6, display: { xs: "flex", lg: "none" } }}>
           {partnerCompanies.slice(0, 8).map((company) => (
-            <div key={company.id} className="card card-hover p-4 text-center">
-              <div className="w-16 h-8 mx-auto mb-3 overflow-hidden rounded bg-white shadow-sm border">
-                <img
-                  src={company.logo}
-                  alt={`${company.name} logo`}
-                  className="w-full h-full object-contain p-1"
-                  loading="lazy"
-                />
-              </div>
-              <h4 className="font-medium text-sm text-foreground">
-                {company.name}
-              </h4>
-            </div>
+            <Grid item xs={6} sm={4} md={3} key={company.id}>
+              <Card sx={{ textAlign: "center", p: 2 }}>
+                <Box
+                  sx={{
+                    width: 60,
+                    height: 30,
+                    mx: "auto",
+                    mb: 1,
+                    overflow: "hidden",
+                    borderRadius: 1,
+                    bgcolor: "background.default",
+                    border: "1px solid",
+                    borderColor: "divider",
+                  }}
+                >
+                  <img
+                    src={company.logo || "/placeholder.svg"}
+                    alt={`${company.name} logo`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      padding: "4px",
+                    }}
+                  />
+                </Box>
+                <Typography variant="h6" fontWeight="bold">
+                  {company.name}
+                </Typography>
+              </Card>
+            </Grid>
           ))}
-        </div>
+        </Grid>
 
         {/* Call to Action */}
-        <div className="text-center mt-16 slide-up">
-          <div className="card p-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-semibold mb-4">
+        <Box sx={{ textAlign: "center", mt: 8 }}>
+          <Card sx={{ p: 4, maxWidth: 800, mx: "auto", borderRadius: 5, boxShadow: 3, bgcolor: "white" }}>
+            <Typography variant="h3" fontWeight="bold" color={themeSettings.text.primary} sx={{ mb: 2 }}>
               Ready to Partner with Rwafi?
-            </h3>
-            <p className="text-muted-foreground mb-6">
-              Join our network of trusted partners and experience seamless logistics solutions 
-              that drive your business forward in the Saudi Arabian market.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn btn-primary">
+            </Typography>
+            <Typography variant="h6" color={themeSettings.text.secondary} sx={{ mb: 3, fontSize: "1.2rem" }}>
+              Join our network of trusted partners and experience seamless logistics solutions that drive your business
+              forward in the Saudi Arabian market.
+            </Typography>
+            <Box sx={{ display: "flex", gap: 2, justifyContent: "center", flexWrap: "wrap" }}>
+              <Button variant="contained" size="large" sx={{ textTransform: "none", fontSize: "1.1rem", bgcolor: themeSettings.primary.main, color: "white", borderRadius: 3, px: 4, '&:hover': { bgcolor: themeSettings.primary.dark } }}>
                 Become a Partner
-              </button>
-              <button className="btn btn-outline">
+              </Button>
+              <Button variant="outlined" size="large" sx={{ textTransform: "none", fontSize: "1.1rem", borderColor: themeSettings.primary.main, color: themeSettings.primary.main, borderRadius: 3, px: 4, bgcolor: "white", '&:hover': { borderColor: themeSettings.primary.dark, color: themeSettings.primary.dark, background: themeSettings.primary.light + '11' } }}>
                 Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+              </Button>
+            </Box>
+          </Card>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
 
-export default PartnerCompanies; 
+export default PartnerCompanies
