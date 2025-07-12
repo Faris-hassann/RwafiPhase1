@@ -65,6 +65,11 @@ import ViewFAQ from './Pages/FAQ/View';
 import Forms from './Pages/Forms';
 
 // User In Forms
+import User from './Pages/Forms/Users';
+import CreateUser from './Pages/Forms/Users/Create';
+import EditUser from './Pages/Forms/Users/Edit';
+import ViewUser from './Pages/Forms/Users/View';
+import ApprovalUser from './Pages/Forms/Users/Approval';
 
 // Side Users Data
 // Type of User
@@ -170,6 +175,13 @@ function App() {
 
               {/* Forms */}
               <Route path="/Forms" element={<ProtectedRoute><Forms /></ProtectedRoute>} />
+
+              {/* Users In Forms */}
+              <Route path="/Users" element={<ProtectedRoute><User /></ProtectedRoute>} />
+              <Route path="/Users/Create" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+              <Route path="/Users/Edit:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+              <Route path="/Users/View:id" element={<ProtectedRoute><ViewUser /></ProtectedRoute>} />
+              <Route path="/Users/Approval:id" element={<ProtectedRoute><ApprovalUser /></ProtectedRoute>} />
 
               {/* TypeUser */}
               <Route path="/TypeUser" element={<ProtectedRoute><TypeUser /></ProtectedRoute>} />
