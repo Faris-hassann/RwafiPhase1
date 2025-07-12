@@ -131,7 +131,7 @@ const Sidebar = () => {
                 <Typography variant="h6" color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
                   Users
                 </Typography>
-                <Item title="Type" to="/Type" icon={<BarChartOutlinedIcon />} selected={selected} setSelected={setSelected} />
+                <Item title="Type" to="/TypeUser" icon={<BarChartOutlinedIcon />} selected={selected} setSelected={setSelected} />
                 <Item title="Supplier" to="/Supplier" icon={<PieChartOutlineOutlinedIcon />} selected={selected} setSelected={setSelected} />
               </>
             )}

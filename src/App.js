@@ -112,7 +112,7 @@ function App() {
               <Route path="/Signin" element={<SignIn />} />
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/Profile" element={<Profile />} />
-              <Route path="/FAQ" element={<ExternalFAQ />} />
+              <Route path="/ExternalFAQ" element={<ExternalFAQ />} />
             </Route>
 
             {/* External Dashboard */}
@@ -166,8 +166,7 @@ function App() {
               {/* TypeUser */}
               <Route path="/TypeUser" element={<ProtectedRoute><TypeUser /></ProtectedRoute>} />
               <Route path="/TypeUser/Create" element={<ProtectedRoute><CreateTypeUser /></ProtectedRoute>} />
-              <Route path="/TypeUser/Edit:id" element={<ProtectedRoute><EditTypeUser /></ProtectedRoute>} />
-
+              <Route path="/TypeUser/Edit/:id" element={<ProtectedRoute><EditTypeUser /></ProtectedRoute>} />
               {/* Supplier */}
             </Route>
 
