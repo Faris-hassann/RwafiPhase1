@@ -22,7 +22,7 @@ const services = [
   {
     title: 'Create User',
     icon: <PersonAddIcon fontSize="large" />,
-    path: '/create-user',
+    path: '/Users',
   },
   {
     title: 'Deactivate User',
