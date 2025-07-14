@@ -178,10 +178,10 @@ function App() {
 
               {/* Users In Forms */}
               <Route path="/Users" element={<ProtectedRoute><User /></ProtectedRoute>} />
-              <Route path="/Users/Create" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
-              <Route path="/Users/Edit:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
-              <Route path="/Users/View:id" element={<ProtectedRoute><ViewUser /></ProtectedRoute>} />
-              <Route path="/Users/Approval:id" element={<ProtectedRoute><ApprovalUser /></ProtectedRoute>} />
+              <Route path="/User/Create" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
+              <Route path="/User/Edit/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+              <Route path="/User/View/:id" element={<ProtectedRoute><ViewUser /></ProtectedRoute>} />
+              <Route path="/User/Approval/:id" element={<ProtectedRoute><ApprovalUser /></ProtectedRoute>} />
 
               {/* TypeUser */}
               <Route path="/TypeUser" element={<ProtectedRoute><TypeUser /></ProtectedRoute>} />
