@@ -47,7 +47,7 @@ const Sidebar = () => {
 
   const canView = {
     dashboard: true,
-    users: true,
+    Employees: true,
     forms: true,
     branches: ["companymanager", "admin", "superadmin"].includes(userRole),
     subCompanies: ["admin", "superadmin"].includes(userRole),
