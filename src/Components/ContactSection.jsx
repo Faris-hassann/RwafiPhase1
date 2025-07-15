@@ -76,8 +76,8 @@ const ContactSection = () => {
 
         <Box sx={{ maxWidth: 1000, mx: "auto" }}>
           <Card sx={{ p: 5, boxShadow: 3, borderRadius: 5, bgcolor: 'white' }}>
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
+            <Grid container spacing={6}>
+              <Grid item xs={12} md={4}>
                 <Typography variant="h4" fontWeight="bold" color={themeSettings.text.primary} sx={{ mb: 3 }}>
                   Contact Information
                 </Typography>
@@ -124,63 +124,69 @@ const ContactSection = () => {
                 </List>
               </Grid>
 
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={8}>
                 <Typography variant="h4" fontWeight="bold" color={themeSettings.text.primary} sx={{ mb: 3 }}>
                   Send us a Message
                 </Typography>
-                <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <TextField 
-                    fullWidth 
-                    label="Your Name" 
-                    variant="outlined"
-                    InputProps={{
-                      style: { fontSize: "1.1rem", color: themeSettings.text.primary },
-                      sx: {
-                        '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.main,
-                          borderRadius: 3,
-                        },
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.dark,
-                        },
-                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.main,
-                        },
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { fontSize: "1.1rem", color: themeSettings.text.primary }
-                    }}
-                  />
-                  <TextField 
-                    fullWidth 
-                    label="Your Email" 
-                    type="email" 
-                    variant="outlined"
-                    InputProps={{
-                      style: { fontSize: "1.1rem", color: themeSettings.text.primary },
-                      sx: {
-                        '& .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.main,
-                          borderRadius: 3,
-                        },
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.dark,
-                        },
-                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                          borderColor: themeSettings.primary.main,
-                        },
-                      },
-                    }}
-                    InputLabelProps={{
-                      style: { fontSize: "1.1rem", color: themeSettings.text.primary }
-                    }}
-                  />
+                <Box component="form" sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField 
+                        fullWidth 
+                        label="Your Name" 
+                        variant="outlined"
+                        InputProps={{
+                          style: { fontSize: "1.1rem", color: themeSettings.text.primary },
+                          sx: {
+                            '& .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.main,
+                              borderRadius: 3,
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.dark,
+                            },
+                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.main,
+                            },
+                          },
+                        }}
+                        InputLabelProps={{
+                          style: { fontSize: "1.1rem", color: themeSettings.text.primary }
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField 
+                        fullWidth 
+                        label="Your Email" 
+                        type="email" 
+                        variant="outlined"
+                        InputProps={{
+                          style: { fontSize: "1.1rem", color: themeSettings.text.primary },
+                          sx: {
+                            '& .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.main,
+                              borderRadius: 3,
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.dark,
+                            },
+                            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                              borderColor: themeSettings.primary.main,
+                            },
+                          },
+                        }}
+                        InputLabelProps={{
+                          style: { fontSize: "1.1rem", color: themeSettings.text.primary }
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
                   <TextField 
                     fullWidth 
                     label="Your Message" 
                     multiline 
-                    rows={4} 
+                    rows={5} 
                     variant="outlined"
                     InputProps={{
                       style: { fontSize: "1.1rem", color: themeSettings.text.primary },
@@ -201,24 +207,40 @@ const ContactSection = () => {
                       style: { fontSize: "1.1rem", color: themeSettings.text.primary }
                     }}
                   />
-                  <Button
-                    variant="contained"
-                    size="large"
-                    sx={{
-                      textTransform: "none",
-                      borderRadius: 3,
-                      py: 1.5,
-                      fontSize: "1.2rem",
-                      bgcolor: themeSettings.primary.main,
-                      color: 'white',
-                      boxShadow: 0,
-                      '&:hover': {
-                        bgcolor: themeSettings.primary.dark,
-                      },
-                    }}
-                  >
-                    Send Message
-                  </Button>
+                  <Box sx={{ 
+                    display: "flex", 
+                    justifyContent: "center", 
+                    alignItems: "center",
+                    mt: 4,
+                    mb: 2,
+                    width: "100%"
+                  }}>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      sx={{
+                        textTransform: "none",
+                        borderRadius: 3,
+                        py: 2,
+                        px: 8,
+                        fontSize: "1.2rem",
+                        fontWeight: "bold",
+                        bgcolor: themeSettings.primary.main,
+                        color: 'white',
+                        boxShadow: 4,
+                        minWidth: 250,
+                        height: 56,
+                        '&:hover': {
+                          bgcolor: themeSettings.primary.dark,
+                          transform: "translateY(-3px)",
+                          boxShadow: 8,
+                        },
+                        transition: "all 0.3s ease",
+                      }}
+                    >
+                      Send Message
+                    </Button>
+                  </Box>
                 </Box>
               </Grid>
             </Grid>

@@ -12,7 +12,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "wouter";
-import { getAllFAQ } from "../Services/FAQ"; // Adjust path as needed
+import { getActiveFAQs } from "../Services/FAQ";
 
 const FAQ = () => {
   const [faqs, setFaqs] = useState([]);
@@ -22,7 +22,7 @@ const FAQ = () => {
   useEffect(() => {
     const fetchFAQs = async () => {
       try {
-        const data = await getAllFAQ();
+        const data = await getActiveFAQs();
         setFaqs(data);
       } catch (error) {
         console.error("Failed to fetch FAQs", error);

@@ -8,9 +8,12 @@ import {
   Verified as VerifiedIcon,
 } from "@mui/icons-material"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 
 const Hero = () => {
   const [mounted, setMounted] = useState(false)
+  const navigate = useNavigate()
 
   // Get the home page theme settings for light mode
   const themeSettings = {
@@ -160,6 +163,7 @@ const Hero = () => {
                   variant="contained"
                   size="large"
                   endIcon={<ArrowForwardIcon />}
+                  onClick={() => navigate("/SignIn")}
                   sx={{
                     px: 6,
                     py: 2,
@@ -171,6 +175,7 @@ const Hero = () => {
                 >
                   Get Started Today
                 </Button>
+
                 <Button
                   variant="outlined"
                   size="large"
@@ -271,7 +276,7 @@ const Hero = () => {
                         height: 40,
                         borderRadius: "50%",
                         color: "white",
-                    }}
+                      }}
                     >
                       <Typography variant="h4" fontWeight="bold">
                         R

@@ -11,6 +11,7 @@ import ExternalFAQ from './Pages/ExternalFAQ';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import NotFound from './Pages/NotFound';
+import PrivacyTerms from './Pages/PrivacyTerms';
 
 // User Dashboard (Private)
 import UserDashboard from './Pages/External/Dashboard';
@@ -126,6 +127,7 @@ function App() {
               <Route path="/SignUp" element={<SignUp />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/ExternalFAQ" element={<ExternalFAQ />} />
+              <Route path="/Privacy&Terms" element={<PrivacyTerms />} />
             </Route>
 
             {/* External Dashboard */}
