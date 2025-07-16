@@ -27,7 +27,7 @@ function Employees() {
   const columns = ['#', 'First Name', 'Last Name', 'Email', 'Phone'];
 
   useEffect(() => {
-    if (!isAuthenticated()) navigate('/login');
+    if (!isAuthenticated()) navigate('/SignIn');
   }, [navigate]);
 
   const fetchAccounts = async () => {

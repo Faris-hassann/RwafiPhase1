@@ -71,12 +71,8 @@ export const getUserFormsByCategoryAndSupplier = async (categoryId, supplierId) 
 };
 
 // ✅ Change Status (Approval)
-export const changeUserFormStatus = async (id, newStatus) => {
-  try {
-    const res = await axiosInstance.put(`api/UserForms/Approval/${id}`, { status: newStatus });
-    return res.data;
-  } catch (error) {
-    console.error(`Error updating status for UserForm ID ${id}:`, error);
-    throw error;
-  }
+export const approveUserForm = (id, isApproved) => {
+  return axiosInstance.put(`/api/UserForms/Approval/${id}`, isApproved, {
+    headers: { 'Content-Type': 'application/json' },
+  });
 };

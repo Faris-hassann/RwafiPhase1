@@ -27,7 +27,7 @@ axiosInstance.interceptors.response.use(
   error => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      window.location.href = '/SignIn';
     }
     return Promise.reject(error);
   }
@@ -70,7 +70,7 @@ export const getAllAccounts = async () => {
 
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = '/login';
+      window.location.href = '/SignIn';
     }
 
     throw error;
@@ -158,7 +158,7 @@ export const getAllRoles = async () => {
 
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = '/login';
+      window.location.href = '/SignIn';
     }
 
     throw error;

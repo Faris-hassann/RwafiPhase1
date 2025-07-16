@@ -23,7 +23,9 @@ const columns = [
   '#',
   'Option Choice',
   'Status',
+  'Created By',
   'Created On',
+  'Updated By',
   'Updated On',
 ];
 
@@ -34,7 +36,7 @@ function UserFormsPage() {
   const [forms, setForms] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [showToast, setShowToast] = useState(null); // 'created' | 'updated' | 'deleted'
+  const [showToast, setShowToast] = useState(null);
 
   useEffect(() => {
     const created = localStorage.getItem('UserFormCreated');
@@ -53,15 +55,16 @@ function UserFormsPage() {
     setLoading(true);
     try {
       const result = await getAllUserForms();
-      console.log(result);
       const normalized = result.map((item, index) => ({
         id: item.id || item.ID,
         '#': index + 1,
         'Option Choice': item.OptionChoice || 'N/A',
         'Status': item.Status || 'N/A',
+        'Created By': item.CreatedByEmail || 'N/A',
         'Created On': item.CreatedOn
           ? new Date(item.CreatedOn).toLocaleString()
           : 'N/A',
+        'Updated By': item.UpdatedByEmail || 'N/A',
         'Updated On': item.UpdatedOn
           ? new Date(item.UpdatedOn).toLocaleString()
           : 'N/A',
@@ -81,6 +84,7 @@ function UserFormsPage() {
   }, []);
 
   const handleEdit = (row) => navigate(`/User/Edit/${row.id}`);
+  const handleView = (row) => navigate(`/User/View/${row.id}`);
   const handleDelete = async (row) => {
     const name = row['Option Choice'] || 'this form';
 
@@ -108,44 +112,16 @@ function UserFormsPage() {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4 }}>
-      {/* Header */}
-      <Card
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-          borderRadius: 2,
-          boxShadow: 3,
-        }}
-      >
-        <CardContent
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
+      <Card sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary, borderRadius: 2, boxShadow: 3 }}>
+        <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h4">User Forms</Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => navigate('/User/Create')}
-          >
+          <Button variant="contained" color="secondary" onClick={() => navigate('/User/Create')}>
             Add New Form
           </Button>
         </CardContent>
       </Card>
 
-      {/* Table */}
-      <Card
-        sx={{
-          mt: 3,
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-          borderRadius: 2,
-          boxShadow: 1,
-          p: 2,
-        }}
-      >
+      <Card sx={{ mt: 3, backgroundColor: theme.palette.background.default, color: theme.palette.text.primary, borderRadius: 2, boxShadow: 1, p: 2 }}>
         <Box>
           {loading ? (
             <Box display="flex" justifyContent="center" py={4}>
@@ -157,16 +133,12 @@ function UserFormsPage() {
             <DataTable
               columns={columns}
               data={forms}
-              actions={{
-                onEdit: handleEdit,
-                onDelete: handleDelete,
-              }}
+              actions={{ onView: handleView, onEdit: handleEdit, onDelete: handleDelete }}
             />
           )}
         </Box>
       </Card>
 
-      {/* Toast */}
       <ToastContainer position="top-end" className="p-3">
         <Toast
           onClose={() => setShowToast(null)}
