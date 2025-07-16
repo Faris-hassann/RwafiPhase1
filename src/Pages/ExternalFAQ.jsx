@@ -23,6 +23,7 @@ const FAQ = () => {
     const fetchFAQs = async () => {
       try {
         const data = await getActiveFAQs();
+        console.log(data);
         setFaqs(data);
       } catch (error) {
         console.error("Failed to fetch FAQs", error);
@@ -91,12 +92,12 @@ const FAQ = () => {
         ) : (
           faqs.map((faq) => (
             <Accordion
-              key={faq.id}
-              expanded={expanded === faq.id}
-              onChange={handleChange(faq.id)}
+              key={faq.Id}
+              expanded={expanded === faq.Id}
+              onChange={handleChange(faq.Id)}
               sx={{
                 mb: 2,
-                border: "1px solid rgba(59, 130, 246, 0.2)", // primary/20
+                border: "1px solid rgba(59, 130, 246, 0.2)",
                 borderRadius: 2,
                 boxShadow: "none",
                 "&:before": { display: "none" },
@@ -111,17 +112,17 @@ const FAQ = () => {
                   color: "text.primary",
                 }}
               >
-                <Typography variant="subtitle1">{faq.question}</Typography>
+                <Typography variant="subtitle1">{faq.Question}</Typography>
               </AccordionSummary>
               <AccordionDetails
                 sx={{
                   px: 2,
                   py: 2,
-                  backgroundColor: "rgba(59, 130, 246, 0.05)", // primary/5
+                  backgroundColor: "rgba(59, 130, 246, 0.05)",
                   color: "text.secondary",
                 }}
               >
-                <div dangerouslySetInnerHTML={{ __html: faq.answer }} />
+                <div dangerouslySetInnerHTML={{ __html: faq.Answer }} />
               </AccordionDetails>
             </Accordion>
           ))
