@@ -3,7 +3,7 @@ import axiosInstance from './axiosInstance';
 // ✅ Get all UserForms
 export const getAllUserForms = async () => {
   try {
-    const res = await axiosInstance.get('api/UserForms');
+    const res = await axiosInstance.get('api/UserForms/GetAll');
     return res.data;
   } catch (error) {
     console.error('Error fetching UserForms:', error);
@@ -14,7 +14,7 @@ export const getAllUserForms = async () => {
 // ✅ Get UserForm by ID
 export const getUserFormById = async (id) => {
   try {
-    const res = await axiosInstance.get(`api/UserForms/${id}`);
+    const res = await axiosInstance.get(`api/UserForms/GetBy/${id}`);
     return res.data;
   } catch (error) {
     console.error(`Error fetching UserForm ID ${id}:`, error);
@@ -25,7 +25,7 @@ export const getUserFormById = async (id) => {
 // ✅ Create UserForm
 export const createUserForm = async (data) => {
   try {
-    const res = await axiosInstance.post('api/UserForms', data);
+    const res = await axiosInstance.post('api/UserForms/Create', data);
     return res.data;
   } catch (error) {
     console.error('Error creating UserForm:', error);
@@ -36,7 +36,7 @@ export const createUserForm = async (data) => {
 // ✅ Edit UserForm
 export const editUserForm = async (id, data) => {
   try {
-    const res = await axiosInstance.put(`api/UserForms/${id}`, data);
+    const res = await axiosInstance.put(`api/UserForms/Edit/${id}`, data);
     return res.data;
   } catch (error) {
     console.error(`Error editing UserForm ID ${id}:`, error);
@@ -47,7 +47,7 @@ export const editUserForm = async (id, data) => {
 // ✅ Delete UserForm
 export const deleteUserForm = async (id) => {
   try {
-    const res = await axiosInstance.delete(`api/UserForms/${id}`);
+    const res = await axiosInstance.delete(`api/UserForms/Delete/${id}`);
     return res.data;
   } catch (error) {
     console.error(`Error deleting UserForm ID ${id}:`, error);

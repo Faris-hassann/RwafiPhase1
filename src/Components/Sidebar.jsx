@@ -47,7 +47,7 @@ const Sidebar = () => {
 
   const canView = {
     dashboard: true,
-    Employees: true,
+    Employees: ["branchmanager", "companymanager", "admin", "superadmin"].includes(userRole),
     forms: true,
     branches: ["companymanager", "admin", "superadmin"].includes(userRole),
     subCompanies: ["admin", "superadmin"].includes(userRole),
@@ -117,7 +117,8 @@ const Sidebar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item title="Dashboard" to="/Dashboard" icon={<HomeOutlinedIcon />} selected={selected} setSelected={setSelected} />
-            <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />
+            {/* <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
+            {canView.Employees && <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />}
             {canView.forms && <Item title="Forms" to="/Forms" icon={<ReceiptOutlinedIcon />} selected={selected} setSelected={setSelected} />}
             {canView.branches && <Item title="Branches" to="/Branches" icon={<ContactsOutlinedIcon />} selected={selected} setSelected={setSelected} />}
             {canView.subCompanies && <Item title="Sub Company" to="/SubCompany" icon={<ContactsOutlinedIcon />} selected={selected} setSelected={setSelected} />}

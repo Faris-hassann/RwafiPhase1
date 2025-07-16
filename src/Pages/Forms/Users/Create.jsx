@@ -95,7 +95,7 @@ function CreateUserForm() {
       });
       setShowToast(true);
       localStorage.setItem('UserFormCreated', 'true');
-      setTimeout(() => navigate('/Users'), 1500);
+      navigate('/Users');
     } catch (error) {
       console.error(error);
       setSubmitError('Failed to create user form.');

@@ -12,6 +12,7 @@ import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import NotFound from './Pages/NotFound';
 import PrivacyTerms from './Pages/PrivacyTerms';
+import Members from './Pages/Members';
 
 // User Dashboard (Private)
 import UserDashboard from './Pages/External/Dashboard';
@@ -70,7 +71,6 @@ import User from './Pages/Forms/Users';
 import CreateUser from './Pages/Forms/Users/Create';
 import EditUser from './Pages/Forms/Users/Edit';
 import ViewUser from './Pages/Forms/Users/View';
-import ApprovalUser from './Pages/Forms/Users/Approval';
 
 // Side Users Data
 // Type of User
@@ -128,6 +128,7 @@ function App() {
               <Route path="/Profile" element={<Profile />} />
               <Route path="/ExternalFAQ" element={<ExternalFAQ />} />
               <Route path="/Privacy&Terms" element={<PrivacyTerms />} />
+              <Route path="/Members" element={<Members />} />
             </Route>
 
             {/* External Dashboard */}
@@ -183,7 +184,6 @@ function App() {
               <Route path="/User/Create" element={<ProtectedRoute><CreateUser /></ProtectedRoute>} />
               <Route path="/User/Edit/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
               <Route path="/User/View/:id" element={<ProtectedRoute><ViewUser /></ProtectedRoute>} />
-              <Route path="/User/Approval/:id" element={<ProtectedRoute><ApprovalUser /></ProtectedRoute>} />
 
               {/* TypeUser */}
               <Route path="/TypeUser" element={<ProtectedRoute><TypeUser /></ProtectedRoute>} />
