@@ -1,3 +1,3 @@
-const BASE_URL = "https://localhost:7154/";
+const BASE_URL = "http://www.faristest.somee.com/";
 
 export default BASE_URL;
