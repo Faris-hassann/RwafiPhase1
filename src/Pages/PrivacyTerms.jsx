@@ -10,6 +10,8 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import {
   Security as SecurityIcon,
@@ -20,6 +22,8 @@ import {
 } from '@mui/icons-material';
 
 const PrivacyTerms = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const location = useLocation();
 
   // Smooth scroll to section when component mounts (if hash in URL or state)

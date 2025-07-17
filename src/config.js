@@ -1,3 +1,3 @@
-const BASE_URL = "http://www.faristest.somee.com/";
+const BASE_URL = "http://FarisTest.somee.com";
 
 export default BASE_URL;

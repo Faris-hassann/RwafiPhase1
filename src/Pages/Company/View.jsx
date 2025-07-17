@@ -14,7 +14,6 @@ import {
   Box,
   CardMedia,
 } from '@mui/material';
-import { Row, Col } from 'react-bootstrap';
 
 function ViewCompany() {
   const { id } = useParams();
@@ -74,10 +73,7 @@ function ViewCompany() {
         </MuiCard>
 
         {/* Image and Name */}
-        <MuiCard className="mb-4 shadow-sm" sx={{
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary, mb: 4, boxShadow: 3
-        }}>
+        <MuiCard className="mb-4 shadow-sm" sx={{ mb: 4, boxShadow: 3 }}>
           {company.ImageUrl && (
             <CardMedia
               component="img"
@@ -94,82 +90,69 @@ function ViewCompany() {
         </MuiCard>
 
         {/* Info */}
-        <MuiCard
-          className="mb-4 shadow-sm"
-          sx={{
-            backgroundColor: theme.palette.background.default,
-            color: theme.palette.text.primary,
-            mb: 4,
-            boxShadow: 3,
-          }}
-        >
+        <MuiCard className="mb-4 shadow-sm" sx={{ mb: 4, boxShadow: 3 }}>
           <CardContent>
-            {/* 1st Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Category:</strong> {company.Category}</Col>
-              <Col md={6} xs={12}><strong>Location:</strong> {company.Location}</Col>
-            </Row>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Category:</strong> {company.Category}</Grid>
+              <Grid item md={6} xs={12}><strong>Location:</strong> {company.Location}</Grid>
+            </Grid>
 
-            {/* 2nd Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Email:</strong> {company.Email}</Col>
-              <Col md={6} xs={12}><strong>Phone:</strong> {company.PhoneNumber}</Col>
-            </Row>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Email:</strong> {company.Email}</Grid>
+              <Grid item md={6} xs={12}><strong>Phone:</strong> {company.PhoneNumber}</Grid>
+            </Grid>
 
-            {/* 3rd Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Wallet:</strong> {company.Wallet || 'N/A'}</Col>
-              <Col md={6} xs={12}><strong>Bitrix ID:</strong> {company.BitrixID}</Col>
-            </Row>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Wallet:</strong> {company.Wallet || 'N/A'}</Grid>
+              <Grid item md={6} xs={12}><strong>Bitrix ID:</strong> {company.BitrixID}</Grid>
+            </Grid>
 
-            {/* 4th Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}>
-                <strong>Company Type:</strong> {company.CompanyOrIndividual ? 'Company' : 'Individual'}
-              </Col>
-              <Col md={6} xs={12}>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}>
+                <strong>Company Type:</strong>{' '}
+                {company.CompanyOrIndividual ? 'Company' : 'Individual'}
+              </Grid>
+              <Grid item md={6} xs={12}>
                 <strong>Promissory Note:</strong><br />
                 {renderFileLink('Promissory Note', company.PromissoryNote)}
-              </Col>
-            </Row>
+              </Grid>
+            </Grid>
 
-            {/* 5th Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Owner ID:</strong> {company.OwnerID}</Col>
-              <Col md={6} xs={12}>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Owner ID:</strong> {company.OwnerID}</Grid>
+              <Grid item md={6} xs={12}>
                 <strong>Owner ID Document:</strong><br />
                 {renderFileLink('Owner ID', company.OwnerIDImageUrl)}
-              </Col>
-            </Row>
+              </Grid>
+            </Grid>
 
-            {/* 6th Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Commercial Register:</strong> {company.CommercialRegister}</Col>
-              <Col md={6} xs={12}>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Commercial Register:</strong> {company.CommercialRegister}</Grid>
+              <Grid item md={6} xs={12}>
                 <strong>Commercial Register Document:</strong><br />
                 {renderFileLink('Commercial Register', company.CommercialRegisterImageURl)}
-              </Col>
-            </Row>
+              </Grid>
+            </Grid>
 
-            {/* 7th Row */}
-            <Row className="mb-3">
-              <Col md={6} xs={12}><strong>Tax Card:</strong> {company.TaxCard}</Col>
-              <Col md={6} xs={12}>
+            <Grid container spacing={2} mb={2}>
+              <Grid item md={6} xs={12}><strong>Tax Card:</strong> {company.TaxCard}</Grid>
+              <Grid item md={6} xs={12}>
                 <strong>Tax Card Document:</strong><br />
                 {renderFileLink('Tax Card', company.TaxCardImageUrl)}
-              </Col>
-            </Row>
+              </Grid>
+            </Grid>
 
-            {/* Full-width Description */}
-            <Row>
-              <Col xs={12}>
+            <Grid container spacing={2} mb={2}>
+              <Grid item xs={12}>
                 <strong>Description:</strong>
-                <Box dangerouslySetInnerHTML={{ __html: company.Description }} mt={2} />
-              </Col>
-            </Row>
+                <Box
+                  dangerouslySetInnerHTML={{ __html: company.Description }}
+                  mt={2}
+                />
+              </Grid>
+            </Grid>
           </CardContent>
         </MuiCard>
-
 
         {/* SubCompanies */}
         {subCompanies.length > 0 && (

@@ -43,8 +43,8 @@ function EditCategory() {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData?.Name || formData.Name.trim() === '') {
-      newErrors.Name = 'Category Name is required';
+    if (!formData?.name || formData.name.trim() === '') {
+      newErrors.name = 'Category name is required';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -123,15 +123,15 @@ function EditCategory() {
                   <Form.Label>Category Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="Name" // Make sure this matches the property in your object
-                    value={formData?.Name || ''}
+                    name="name"
+                    value={formData?.name || ''}
                     onChange={handleChange}
-                    isInvalid={!!errors.Name}
+                    isInvalid={!!errors.name}
                     placeholder="Enter category name"
                     style={inputStyle}
                   />
                   <Form.Control.Feedback type="invalid">
-                    {errors.Name}
+                    {errors.name}
                   </Form.Control.Feedback>
                 </Form.Group>
               </Col>

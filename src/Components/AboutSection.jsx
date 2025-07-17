@@ -6,8 +6,14 @@ import {
   Grid,
   Card,
   Avatar,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Chip,
-  Button
+  Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material"
 import { 
   CheckCircle as CheckCircleIcon,
@@ -25,6 +31,8 @@ import {
 import { useState, useEffect } from "react"
 
 const AboutSection = () => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [animate, setAnimate] = useState(false)
 
   useEffect(() => {
@@ -408,6 +416,7 @@ const AboutSection = () => {
                         },
                         opacity: animate ? 1 : 0,
                         transform: animate ? "translateY(0)" : "translateY(20px)",
+                        transition: `all 0.5s ease-out ${0.8 + index * 0.1}s`,
                       }}
                     >
                       <Avatar 

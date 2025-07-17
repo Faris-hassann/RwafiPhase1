@@ -10,7 +10,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, useTheme } from '@mui/material';
-    
+
 const SubCompanyWizard = () => {
     const theme = useTheme();
     const [currentStep, setCurrentStep] = useState(1);
@@ -31,6 +31,7 @@ const SubCompanyWizard = () => {
         location: '',
         email: '',
         phoneNumber: '',
+        bitrixID: '',
         companyOrIndividual: '',
         imageUrl: null,
         commercialRegister: '',
@@ -84,7 +85,7 @@ const SubCompanyWizard = () => {
 
         const requiredFields = [
             'companyID', 'name', 'category', 'location', 'email',
-            'phoneNumber', 'companyOrIndividual', 'imageUrl'
+            'phoneNumber', 'bitrixID', 'companyOrIndividual', 'imageUrl'
         ];
 
         const missing = requiredFields.filter(field => !formData[field]);
@@ -112,6 +113,7 @@ const SubCompanyWizard = () => {
         finalData.append('location', formData.location);
         finalData.append('email', formData.email);
         finalData.append('phoneNumber', formData.phoneNumber);
+        finalData.append('bitrixID', formData.bitrixID);
         finalData.append('companyOrIndividual', isCompany);
         finalData.append('description', formData.description || '');
         finalData.append('commercialRegister', formData.commercialRegister || '');
@@ -151,8 +153,7 @@ const SubCompanyWizard = () => {
 
     return (
         <Container maxWidth="lg" sx={{ mt: 4 }}>
-            {/* Header */}
-            <Card sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary, borderRadius: 2, boxShadow: 3, marginBottom: 3 }}>
+            <Card sx={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.primary, borderRadius: 2, boxShadow: 3, marginBottom: 3, m: 6 }}>
                 <CardContent sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div className="container mt-5">
                         <div className="progress px-1 mb-4">
@@ -263,6 +264,10 @@ const StepTwo = ({ formData, handleInputChange, showCustomCategory, categories }
             <div className="col-md-6 mb-3">
                 <label>Phone Number <span className="text-danger">*</span></label>
                 <input type="text" className="form-control" name="phoneNumber" value={formData.phoneNumber} onChange={handleInputChange} placeholder="Please Enter PhoneNumber" />
+            </div>
+            <div className="col-md-6 mb-3">
+                <label>Bitrix ID <span className="text-danger">*</span></label>
+                <input type="text" className="form-control" name="bitrixID" value={formData.bitrixID} onChange={handleInputChange} placeholder="Please Enter BitrixID" />
             </div>
         </div>
     </div>

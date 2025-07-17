@@ -7,11 +7,14 @@ import {
   Grid,
   Link,
   Divider,
+  useTheme,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
+
   const themeSettings = {
     primary: {
       main: "#1976d2",
@@ -30,7 +33,7 @@ const Footer = () => {
   };
 
   const handleLegalLink = (section) => {
-    navigate('/Privacy&Terms', { state: { scrollTo: section } });
+    navigate('/privacy-terms', { state: { scrollTo: section } });
   };
 
   return (

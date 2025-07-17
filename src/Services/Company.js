@@ -1,71 +1,51 @@
-import axiosInstance from './axiosInstance';
+import axios from 'axios';
+import BASE_URL from '../config';
 
-// ✅ Get all Companies
+// Fetch all companies
 export const getAllCompanies = async () => {
   try {
-    const res = await axiosInstance.get('api/Company/GetAll');
-    return res.data;
+    const response = await axios.get(`${BASE_URL}api/Company/GetAll`);
+    return response.data;
   } catch (error) {
     console.error('Error fetching companies:', error);
     throw error;
   }
 };
 
-// ✅ Create Company (with multipart/form-data)
 export const createCompany = async (formData) => {
-  try {
-    const res = await axiosInstance.post('api/Company/Create', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return res.data;
-  } catch (error) {
-    console.error('Error creating company:', error);
-    throw error;
-  }
+  console.log(formData);
+  const response = await axios.post(`${BASE_URL}api/Company/Create`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
 };
 
-// ✅ Get Company by ID
+// Get a single company by ID
 export const getCompanyById = async (id) => {
-  try {
-    const res = await axiosInstance.get(`api/Company/GetBy/${id}`);
-    return res.data;
-  } catch (error) {
-    console.error(`Error fetching company ID ${id}:`, error);
-    throw error;
-  }
+  const response = await axios.get(`${BASE_URL}api/Company/GetBy/${id}`);
+  return response.data;
 };
 
-// ✅ Get Companies by Category Name
+// Get companies by category
 export const getCompaniesByCategory = async (categoryName) => {
   try {
-    const res = await axiosInstance.get(`api/Company/GetByCategory/${encodeURIComponent(categoryName)}`);
-    return res.data;
+    const response = await axios.get(`${BASE_URL}api/Company/GetByCategory/${encodeURIComponent(categoryName)}`);
+    return response.data;
   } catch (error) {
     console.error(`Error fetching companies by category '${categoryName}':`, error);
     throw error;
   }
 };
 
-// ✅ Update Company
-export const updateCompany = async (id, data) => {
-  try {
-    const res = await axiosInstance.put(`api/Company/Edit/${id}`, data);
-    return res.data;
-  } catch (error) {
-    console.error(`Error updating company ID ${id}:`, error);
-    throw error;
-  }
+// Update a company
+export const updateCompany = async (id, companyData) => {
+  const response = await axios.put(`${BASE_URL}api/Company/Edit/${id}`, companyData);
+  return response.data;
 };
 
-// ✅ Delete Company
+// DELETE Company by ID
 export const deleteCompany = async (id) => {
-  try {
-    const res = await axiosInstance.delete(`api/Company/Delete/${id}`);
-    return res.data;
-  } catch (error) {
-    console.error(`Error deleting company ID ${id}:`, error);
-    throw error;
-  }
+  return await axios.delete(`${BASE_URL}api/Company/Delete/${id}`);
 };

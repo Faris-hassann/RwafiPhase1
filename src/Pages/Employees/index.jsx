@@ -23,11 +23,11 @@ function Employees() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(null); // 'created', 'updated', or 'deleted'
-
+    
   const columns = ['#', 'First Name', 'Last Name', 'Email', 'Phone'];
 
   useEffect(() => {
-    if (!isAuthenticated()) navigate('/SignIn');
+    if (!isAuthenticated()) navigate('/login');
   }, [navigate]);
 
   const fetchAccounts = async () => {
@@ -117,6 +117,7 @@ function Employees() {
           color: theme.palette.text.primary,
           borderRadius: 2,
           boxShadow: 3,
+          mb: 3,
         }}
       >
         <CardContent
@@ -124,10 +125,18 @@ function Employees() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            p: 3,
           }}
         >
-          <Typography variant="h4">Employees Data</Typography>
-          <Button variant="contained" color="secondary" onClick={() => navigate('/Employees/Create')}>
+          <Typography variant="h4" component="h1">
+            Employees Management
+          </Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => navigate('/Employees/Create')}
+            sx={{ px: 4, py: 1.5, fontWeight: 'bold' }}
+          >
             Add New Employee
           </Button>
         </CardContent>
@@ -135,7 +144,6 @@ function Employees() {
 
       <Card
         sx={{
-          mt: 3,
           backgroundColor: theme.palette.background.default,
           color: theme.palette.text.primary,
           borderRadius: 2,

@@ -33,6 +33,7 @@ const CompanyWizard = () => {
     location: '',
     email: '',
     phoneNumber: '',
+    bitrixID: '',
     companyOrIndividual: '',
     imageUrl: null,
     commercialRegister: '',
@@ -80,7 +81,7 @@ const CompanyWizard = () => {
 
     const requiredFields = [
       'name', 'category', 'location', 'email',
-      'phoneNumber', 'companyOrIndividual', 'imageUrl'
+      'phoneNumber', 'bitrixID', 'companyOrIndividual', 'imageUrl'
     ];
 
     if (isCompany) {
@@ -107,6 +108,7 @@ const CompanyWizard = () => {
     finalData.append('location', formData.location);
     finalData.append('email', formData.email);
     finalData.append('phoneNumber', formData.phoneNumber);
+    finalData.append('bitrixID', formData.bitrixID);
     finalData.append('companyOrIndividual', isCompany ? 'true' : 'false');
     finalData.append('description', formData.description || '');
     finalData.append('commercialRegister', formData.commercialRegister || '');
@@ -241,6 +243,10 @@ const StepTwo = ({ formData, handleInputChange, showCustomCategory, categories }
       <div className="col-md-6 mb-3">
         <label>Phone Number <span className="text-danger">*</span></label>
         <input type="text" className="form-control" name="phoneNumber" value={formData.phoneNumber} placeholder='Please Enter PhoneNumber' onChange={handleInputChange} />
+      </div>
+      <div className="col-md-6 mb-3">
+        <label>Bitrix ID <span className="text-danger">*</span></label>
+        <input type="text" className="form-control" name="bitrixID" value={formData.bitrixID} placeholder='Please Enter BitrixID' onChange={handleInputChange} />
       </div>
     </div>
   </div>

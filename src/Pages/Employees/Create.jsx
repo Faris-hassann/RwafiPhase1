@@ -125,7 +125,7 @@ const CreateUser = () => {
 
     try {
       await createAccount(data);
-      navigate('/Employees', { state: { toast: 'created' } });
+      navigate('/Users', { state: { toast: 'created' } });
     } catch (error) {
       console.error(error);
       setSubmitError('User creation failed. Please verify all fields.');

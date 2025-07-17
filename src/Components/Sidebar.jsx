@@ -14,6 +14,7 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import GroupIcon from "@mui/icons-material/Group";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -47,8 +48,9 @@ const Sidebar = () => {
 
   const canView = {
     dashboard: true,
-    Employees: ["branchmanager", "companymanager", "admin", "superadmin"].includes(userRole),
+    users: true,
     forms: true,
+    members: true,
     branches: ["companymanager", "admin", "superadmin"].includes(userRole),
     subCompanies: ["admin", "superadmin"].includes(userRole),
     companies: ["superadmin"].includes(userRole),
@@ -117,8 +119,8 @@ const Sidebar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item title="Dashboard" to="/Dashboard" icon={<HomeOutlinedIcon />} selected={selected} setSelected={setSelected} />
-            {/* <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} /> */}
-            {canView.Employees && <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />}
+            <Item title="Employees" to="/Employees" icon={<PeopleOutlinedIcon />} selected={selected} setSelected={setSelected} />
+            {canView.members && <Item title="Members" to="/Members" icon={<GroupIcon />} selected={selected} setSelected={setSelected} />}
             {canView.forms && <Item title="Forms" to="/Forms" icon={<ReceiptOutlinedIcon />} selected={selected} setSelected={setSelected} />}
             {canView.branches && <Item title="Branches" to="/Branches" icon={<ContactsOutlinedIcon />} selected={selected} setSelected={setSelected} />}
             {canView.subCompanies && <Item title="Sub Company" to="/SubCompany" icon={<ContactsOutlinedIcon />} selected={selected} setSelected={setSelected} />}

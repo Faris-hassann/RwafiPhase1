@@ -17,7 +17,6 @@ window.jQuery = $;
 const DataTable = ({ columns = [], data = [], actions = {}, customRender = {} }) => {
   const tableRef = useRef();
   const extendedColumns = [...columns, 'Action'];
-  const userRole = localStorage.getItem('userRole'); // ✅ Get user role
 
   useEffect(() => {
     const table = $(tableRef.current).DataTable({
@@ -67,18 +66,14 @@ const DataTable = ({ columns = [], data = [], actions = {}, customRender = {} })
                     <VisibilityIcon />
                   </IconButton>
                 </Tooltip>
-
-                {/* ✅ Show Delete only for SuperAdmin */}
-                {userRole === 'SuperAdmin' && (
-                  <Tooltip title="Delete">
-                    <IconButton
-                      color="error"
-                      onClick={() => actions.onDelete && actions.onDelete(row)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
-                )}
+                <Tooltip title="Delete">
+                  <IconButton
+                    color="error"
+                    onClick={() => actions.onDelete && actions.onDelete(row)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
               </td>
             </tr>
           ))}
